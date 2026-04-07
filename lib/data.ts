@@ -39,21 +39,21 @@ export const PROJECTS = [
 export const CURRENT_ROLES = [
     {
         role: "President",
-        organization: "Advanced Tech Club",
+        organization: "AI & Data Science Department",
         type: "Leadership",
     },
     {
-        role: "Computer Science Student",
-        organization: "Sanjay Ghodawat University",
+        role: "B.Tech in Computer Science (AI & Data Science)",
+        organization: "NIAT",
         type: "Academic",
     },
     {
-        role: "Competitor",
-        organization: "Microsoft Imagine Cup",
+        role: "Winner",
+        organization: "Ideathon By NIAT",
         type: "Global Hackathon",
     },
     {
-        role: "AI & Web Developer",
+        role: "AI Automations & Responsive Web Builder",
         organization: "Freelance / Indie",
         type: "Builder",
     },

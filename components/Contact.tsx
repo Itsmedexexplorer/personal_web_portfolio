@@ -22,22 +22,27 @@ export function Contact() {
                 </h1>
 
                 <Link
-                    href="mailto:hello@coleadrian.design"
-                    className="text-2xl md:text-4xl font-merriweather text-navy-700 border-b-2 border-navy-700/20 hover:border-rust-500 hover:text-rust-500 transition-all pb-1 mb-16"
+                    href="mailto:itsmedexexplorer@gmail.com"
+                    className="text-2xl md:text-3xl font-merriweather text-navy-700 border-b-2 border-navy-700/20 hover:border-rust-500 hover:text-rust-500 transition-all pb-1 mb-16"
                 >
-                    hello@coleadrian.design
+                    itsmedexexplorer@gmail.com
                 </Link>
 
                 <div className="flex flex-wrap gap-8 md:gap-16 justify-center">
-                    {['Twitter', 'LinkedIn', 'Instagram', 'Dribbble'].map((social) => (
-                        <Link
-                            key={social}
-                            href="#"
-                            className="font-merriweather text-navy-700/60 hover:text-navy-700 transition-colors text-lg"
-                        >
-                            {social}
-                        </Link>
-                    ))}
+                    <Link
+                        href="https://github.com/Itsmedexexplorer"
+                        target="_blank"
+                        className="font-merriweather text-navy-700/60 hover:text-navy-700 transition-colors text-lg"
+                    >
+                        GitHub
+                    </Link>
+                    <Link
+                        href="https://www.linkedin.com/in/dhanesh-shetty-222597353/"
+                        target="_blank"
+                        className="font-merriweather text-navy-700/60 hover:text-navy-700 transition-colors text-lg"
+                    >
+                        LinkedIn
+                    </Link>
                 </div>
             </motion.div>
 

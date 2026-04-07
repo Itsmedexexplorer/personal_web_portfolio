@@ -42,7 +42,7 @@ export function Hero() {
                     className="font-sans text-neutral-600 text-lg md:text-xl leading-relaxed mb-12 max-w-lg"
                 >
                     Inventing the Future with AI. <br />
-                    CS Student @ NIAT & Builder. <br />
+                    Artificial Intelligence & Data Science (AIDS) Student @ NIAT. <br />
                     Exploring Agentic Intelligence & Human-AI Synergy.
                 </motion.p>
 
