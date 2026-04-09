@@ -2,9 +2,29 @@
 export const NAV_ITEMS = [
     { id: 'home', label: 'Home' },
     { id: 'about', label: 'About' },
+    { id: 'skills', label: 'Skills' },
     { id: 'projects', label: 'Project' },
     { id: 'certifications', label: 'Credentials' },
     { id: 'contact', label: 'Hire Me!', isCta: true },
+];
+
+export const SKILLS = [
+    {
+        name: "Python",
+        icon: "/skills/python.png",
+    },
+    {
+        name: "C++",
+        icon: "/skills/C++.png",
+    },
+    {
+        name: "Web Development",
+        icon: "/skills/webdev.png",
+    },
+    {
+        name: "SQL",
+        icon: "/skills/SQL.png",
+    },
 ];
 
 export const PROJECTS = [
@@ -59,33 +79,60 @@ export const CURRENT_ROLES = [
     },
 ];
 
-export const CERTIFICATIONS = [
+export interface Certificate {
+    id: number;
+    title: string;
+    category: string;
+    year: string;
+    color: string;
+    image: string;
+    modalInfo: string;
+}
+
+export const CERTIFICATIONS: Certificate[] = [
     {
         id: 1,
-        title: "AWS Architect",
-        category: "Cloud Computing",
-        year: "2024",
-        color: "bg-[#232F3E]", // AWS
+        title: "GENAI BUILDATHON",
+        category: "GENERATIVE AI",
+        year: "Sep 15, 2025",
+        color: "bg-neutral-900",
+        image: "/Certificates/genai_buildathon.jpeg",
+        modalInfo: "OpenAI Academy x NxtWave | Generative AI Mastery Workshop | Sep 15, 2025"
     },
     {
         id: 2,
-        title: "Google UX",
-        category: "Design",
-        year: "2023",
-        color: "bg-[#4285F4]", // Google
+        title: "GOOGLE FOR STARTUPS",
+        category: "STARTUPS",
+        year: "Dec 29, 2025",
+        color: "bg-neutral-800",
+        image: "/Certificates/google_startups.jpeg",
+        modalInfo: "Google for Startups | Startup School: Prompt to Prototype | Dec 29, 2025"
     },
     {
         id: 3,
-        title: "Meta Frontend",
-        category: "Development",
-        year: "2023",
-        color: "bg-[#0668E1]", // Meta
+        title: "NASA SPACE APPS",
+        category: "HACKATHON",
+        year: "Oct 4–5, 2025",
+        color: "bg-neutral-900",
+        image: "/Certificates/nasa_hackathon.jpeg",
+        modalInfo: "NASA International Space Apps Challenge | Galactic Problem Solver | Oct 4–5, 2025"
     },
     {
         id: 4,
-        title: "Hackathon Win",
-        category: "Achievement",
-        year: "2023",
-        color: "bg-[#1B3B8C]", // Navy 700 (approx) or keep consistent
+        title: "OUTSKILL MASTERMIND",
+        category: "AI",
+        year: "2025",
+        color: "bg-neutral-800",
+        image: "/Certificates/outskill.jpeg",
+        modalInfo: "Outskill | Generative AI Mastermind | Vaibhav Sisinty, Founder"
+    },
+    {
+        id: 5,
+        title: "TEXT EMBEDDINGS",
+        category: "LLM SYSTEMS",
+        year: "Feb 24, 2026",
+        color: "bg-neutral-900",
+        image: "/Certificates/Text%20Embeddings.jpeg",
+        modalInfo: "NIAT Masterclass | Applying Text Embeddings in LLM Systems | Flipkart Data Scientist | Feb 24, 2026"
     },
 ];
