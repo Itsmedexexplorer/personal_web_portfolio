@@ -10,7 +10,7 @@ export function Projects() {
             <StackingCards
                 projects={PROJECTS}
                 title="Selected Works"
-                description="A curated collection of projects that define my approach to digital product design."
+                description="Built, shipped, and still building."
             />
 
             <div className="pb-24 pt-12 flex justify-center bg-[#FAFAFA]">

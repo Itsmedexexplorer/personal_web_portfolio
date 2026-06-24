@@ -35,28 +35,35 @@ export function Hero() {
                     </motion.span>
                 </h1>
 
-                <motion.p
+                <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.8, delay: 0.8 }}
-                    className="font-sans text-neutral-600 text-lg md:text-xl leading-relaxed mb-12 max-w-lg"
+                    className="font-sans text-neutral-600 text-lg md:text-xl leading-relaxed mb-12 max-w-lg flex flex-col gap-1"
                 >
-                    Inventing the Future with AI. <br />
-                    Artificial Intelligence & Data Science (AIDS) Student @ NIAT. <br />
-                    Exploring Agentic Intelligence & Human-AI Synergy.
-                </motion.p>
+                    <p>I run an automation agency.</p>
+                    <p>I lead 200+ students.</p>
+                    <p>I build things that ship.</p>
+                    <p className="mt-4">This is year one</p>
+                </motion.div>
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 1 }}
-                    className="flex gap-6"
+                    className="flex items-center gap-4"
                 >
-                    <a href="#projects" className="border-b border-black pb-1 text-black hover:opacity-60 transition-opacity font-medium">
-                        See My Projects
+                    <a 
+                        href="#projects" 
+                        className="bg-black text-white px-8 py-3.5 rounded-full font-medium transition-all duration-300 hover:scale-105 hover:bg-neutral-900 shadow-sm"
+                    >
+                        Explore My Work
                     </a>
-                    <a href="#contact" className="border-b border-transparent pb-1 text-neutral-500 hover:text-black hover:border-black transition-all">
-                        Contact Me
+                    <a 
+                        href="#contact" 
+                        className="text-neutral-700 px-6 py-3.5 rounded-full font-medium transition-all duration-300 hover:bg-black/5 active:bg-black/10"
+                    >
+                        Let's Talk
                     </a>
                 </motion.div>
             </div>
