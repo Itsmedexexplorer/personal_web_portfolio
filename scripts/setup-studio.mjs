@@ -1,9 +1,15 @@
 #!/usr/bin/env node
 // Generates the studio secrets. Run: npm run setup-studio
-// Prints env vars to paste into Vercel (Settings → Environment Variables). Nothing is written to disk.
+//   npm run setup-studio            → prints the env vars to paste into Vercel
+//   npm run setup-studio -- --vercel → sends them straight to the linked Vercel project (needs `vercel link`)
+// Nothing is written to disk.
+import { spawnSync } from "node:child_process";
 import { randomBytes, scrypt } from "node:crypto";
 import { createInterface } from "node:readline";
 import { promisify } from "node:util";
+
+const toVercel = process.argv.includes("--vercel");
+const withTotp = !process.argv.includes("--no-2fa");
 
 const ask = (q, hidden) =>
   new Promise((resolve) => {
@@ -12,11 +18,16 @@ const ask = (q, hidden) =>
     rl.question(q, (a) => { rl.close(); if (hidden) process.stdout.write("\n"); resolve(a); });
   });
 
-const password = process.argv[2] ?? (await ask("Choose a studio password (12+ characters): ", true));
+const password = await ask("Choose a studio password (12+ characters): ", true);
 if (!password || password.length < 12) {
   console.error("Use at least 12 characters.");
   process.exit(1);
 }
+if ((await ask("Type it again: ", true)) !== password) {
+  console.error("The two passwords don't match.");
+  process.exit(1);
+}
+
 const salt = randomBytes(16);
 const hash = await promisify(scrypt)(password.normalize("NFKC"), salt, 64);
 const b32 = (buf) => {
@@ -26,19 +37,31 @@ const b32 = (buf) => {
   for (let i = 0; i + 5 <= bits.length; i += 5) out += a[parseInt(bits.slice(i, i + 5), 2)];
   return out;
 };
-const totp = b32(randomBytes(20));
+
+const vars = {
+  ADMIN_PASSWORD_HASH: `scrypt:${salt.toString("hex")}:${hash.toString("hex")}`,
+  ADMIN_SECRET_KEY: randomBytes(24).toString("base64url"),
+  SESSION_SECRET: randomBytes(48).toString("base64url"),
+  ...(withTotp ? { ADMIN_TOTP_SECRET: b32(randomBytes(20)) } : {}),
+};
+
+if (toVercel) {
+  for (const [name, value] of Object.entries(vars)) {
+    const r = spawnSync("npx", ["vercel", "env", "add", name, "production", "--sensitive", "--force"], { input: value, stdio: ["pipe", "ignore", "inherit"] });
+    if (r.status !== 0) { console.error(`Could not add ${name}. Is this folder linked? Run: npx vercel link`); process.exit(1); }
+    console.log(`✓ ${name} added to Vercel (production)`);
+  }
+} else {
+  console.log("\nAdd these in Vercel → Project → Settings → Environment Variables (Production), then redeploy:\n");
+  for (const [name, value] of Object.entries(vars)) console.log(`${name}=${value}`);
+}
 
 console.log(`
-Add these in Vercel → Project → Settings → Environment Variables (Production), then redeploy:
+Save these two in your password manager now. You need them to sign in at /studio:
 
-ADMIN_PASSWORD_HASH=scrypt:${salt.toString("hex")}:${hash.toString("hex")}
-ADMIN_SECRET_KEY=${randomBytes(24).toString("base64url")}
-SESSION_SECRET=${randomBytes(48).toString("base64url")}
-
-Optional 2FA (recommended): also add
-ADMIN_TOTP_SECRET=${totp}
-and add it to Google Authenticator / 1Password as a manual key:
-otpauth://totp/Studio:dhaneshshetty.in?secret=${totp}&issuer=Studio
-
-Keep ADMIN_SECRET_KEY somewhere safe (a password manager). You type it at login with your password.
+  Secret key:  ${vars.ADMIN_SECRET_KEY}
+${withTotp ? `  2FA key:     ${vars.ADMIN_TOTP_SECRET}
+               (add it to Google Authenticator: + → Enter a setup key → time-based)
+` : ""}
+Then redeploy so the site picks them up.
 `);
