@@ -1,0 +1,30 @@
+/* Project pages: the same orbit palette, no WebGL, built to load instantly. */
+body:has(.work-page) {
+  background: radial-gradient(120% 70% at 50% 120%, #1d3c7a 0%, #07102a 45%, #02040a 100%) fixed, #02040a;
+  color: var(--light);
+}
+.work-page { --ink: var(--light); --mute: rgba(238, 242, 250, .6); --hair: rgba(238, 242, 250, .14); min-height: 100vh; }
+.wp-top { max-width: 960px; margin: 0 auto; padding: max(20px, env(safe-area-inset-top)) 24px 0; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+.wp-home { font-weight: 600; letter-spacing: -0.02em; }
+.crumbs { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; font: 12px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
+.crumbs li + li::before { content: "/"; margin-right: 8px; opacity: .5; }
+.crumbs a:hover { color: var(--light); }
+.crumbs [aria-current] { color: var(--light); }
+.wp-main { max-width: 960px; margin: 0 auto; padding: clamp(56px, 10vw, 110px) 24px 80px; }
+.wp-main h1 { font-weight: 500; font-size: clamp(52px, 10vw, 120px); line-height: .92; letter-spacing: -0.055em; margin: 14px 0 22px; }
+.wp-lead { font-size: clamp(18px, 2.2vw, 24px); line-height: 1.45; max-width: 720px; color: rgba(238, 242, 250, .82); }
+.wp-media { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; margin: 48px 0 0; border-radius: 22px; border: 1px solid var(--hair); background: rgba(255, 255, 255, .03); }
+.wp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--hair); }
+.wp-grid h2, .wp-stack h2 { font: 500 11px var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--mute); margin: 0 0 10px; }
+.wp-grid p { color: rgba(238, 242, 250, .85); }
+.wp-stack { margin-top: 44px; }
+.wp-stack ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+.wp-stack li { font: 12px var(--font-mono); padding: 7px 12px; border-radius: 999px; border: 1px solid var(--hair); }
+.wp-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; }
+.wp-btn { display: inline-flex; align-items: center; gap: 10px; padding: 13px 20px; border-radius: 999px; background: var(--light); color: var(--deep); font-weight: 500; }
+.wp-btn + .wp-btn { background: transparent; color: var(--light); border: 1px solid var(--hair); }
+.wp-next { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 6px 16px; margin-top: 90px; padding: 28px 0; border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair); }
+.wp-next strong { grid-column: 1; font-weight: 500; font-size: clamp(32px, 6vw, 56px); letter-spacing: -0.04em; line-height: 1; }
+.wp-next .arrow { grid-row: 1 / span 2; grid-column: 2; width: 28px; height: 28px; transition: transform .5s var(--ease); }
+.wp-next:hover .arrow { transform: translateX(6px); }
+@media (max-width: 720px) { .wp-grid { grid-template-columns: 1fr; gap: 22px; } }

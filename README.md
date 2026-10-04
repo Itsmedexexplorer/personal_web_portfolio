@@ -1,87 +1,49 @@
-# Portfolio 2025 - Fluid & Reactive
+# dhaneshshetty.in
 
-A highly interactive, premium personal portfolio website exploring the concepts of **Agentic Intelligence** and **Human-AI Synergy**. Built with modern web technologies to deliver a "fluid" and "reactive" user experience.
+My portfolio. You start on the ground under a blue sky; as you scroll you climb through the clouds into orbit, then fly through each project one by one while a particle form reshapes into a symbol for it.
 
-## 🚀 Technical Stack
+- **Next.js 16** (App Router, server components, ISR) · **Three.js** for the sky and particles · **Lenis** smooth scroll
+- **Live GitHub heatmap** and "currently building" pill, refreshed from GitHub every hour
+- **Studio** at `/studio`: edit projects, log, skills, recognition and resume from the browser. Publishing updates the live site in about a second, no redeploy.
 
-- **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Animations**: [Framer Motion v12](https://www.framer.com/motion/)
-- **Smooth Scroll**: [Lenis](https://lenis.studio/)
-- **Language**: TypeScript
+## Run it
 
-## ✨ Key Features & "Juice"
+```bash
+npm install
+npm run dev
+```
 
-This portfolio was designed to feel alive. Every interaction provides feedback, and navigation feels continuous rather than abrupt.
+Without any environment variables the site runs on the bundled content in `lib/content/defaults.ts`.
 
-### Core Experience
-- **Momentum Scrolling**: Integrated `Lenis` for silky-smooth, inertial scrolling that completely transforms the browsing feel.
-- **Custom Magnetic Cursor**: A custom trailing cursor that snaps to interactive elements (buttons, links) with a magnetic pull effect.
-- **Global Texture**: A subtle noise/grain overlay that adds depth and a "film" visual quality to the digital interface.
+## The studio
 
-### Component Highlights
+Content is one JSON document. The studio writes each published version to Vercel Blob as a new immutable file, keeps the last 12 as history (restorable), and expires the page cache with `updateTag`, so every visitor sees the change on their next request.
 
-#### 1. Hero Section
-- **Staggered Text Reveal**: The main headline animates letter-by-letter on load for a dramatic entrance.
-- **Magnetic Buttons**: Call-to-action buttons physically pull towards your cursor when you hover near them.
+### Set it up once
 
-#### 2. Selected Works (Projects)
-- **Stacking Cards Layout**: Projects are presented as a vertical stack of large, immersive cards.
-- **Parallax Scroll**: As you scroll, cards stack on top of each other with a subtle scale effect, creating a feeling of depth.
-- **Rich Details**: Visual focus on high-quality imagery with context-rich descriptions.
+1. **Storage.** In Vercel: *Storage → Create → Blob*, connect it to this project. That adds `BLOB_READ_WRITE_TOKEN`.
+2. **Secrets.** Run `npm run setup-studio`, choose a password, and paste the printed variables into *Settings → Environment Variables*:
+   - `ADMIN_PASSWORD_HASH` (scrypt hash; your password is never stored)
+   - `ADMIN_SECRET_KEY` (a second secret you type at login)
+   - `SESSION_SECRET` (signs the session cookie; change it to sign out everywhere)
+   - `ADMIN_TOTP_SECRET` (optional authenticator-app 2FA)
+3. **Redeploy.** Then open `/studio`.
 
-#### 3. Credentials (Certifications)
-- **Expand-on-Hover Accordion**: A reactive horizontal layout that expands the hovered item to reveal details.
-- **Responsive Design**: Gracefully transforms into a clean vertical stack on mobile devices.
-- **Visual Feedback**: Hover states trigger immediate expansion and opacity changes for non-focused items.
+Security: scrypt password hashing, constant-time comparisons, optional TOTP, 5 failed attempts per 15 minutes per IP, an 8-hour httpOnly `SameSite=Strict` session, every server action re-checks the session, all saved links are sanitised to http(s)/mailto, and uploads are limited to images, video and PDF up to 25 MB.
 
-#### 4. Intelligent Navbar
-- **Active State Tracking**: The navbar uses an `IntersectionObserver` to track which section is currently in view.
-- **Floating Pill Animation**: A white "pill" background smoothly glides behind the active link, visualizing your journey through the page.
-- **Glassmorphism**: The navbar sits on a blurred, semi-transparent background that separates it from the content.
+## Where things live
 
-## 🔄 Development Iterations
+| Path | What |
+| --- | --- |
+| `lib/content/` | Content types, bundled defaults, validation and the Blob-backed store |
+| `components/scene/` | Sky shader, particle shapes and the WebGL canvas |
+| `components/site/` | Page sections; `Voyage.tsx` is the pinned project flight |
+| `app/studio/` | Studio page and server actions |
+| `lib/auth.ts` | Password, secret key, TOTP and sessions |
 
-The development of this portfolio progressed through several focused phases:
+## Performance notes
 
-### Version 1.0: Foundation
-- Project scaffolding with Next.js and Tailwind CSS.
-- Basic component architecture (Hero, About, Projects, Contact).
-- Implementation of the "Paper & Ink" aesthetic color palette.
-
-### Version 2.0: Content & Structure
-- Population of real data (Experience, Certifications, Bio).
-- Refinement of typography using *Merriweather* and *Playfair Display*.
-- Implementation of the "Timeline" component for the Experience section.
-
-### Version 3.0: "The Fluidity Update" (Current)
-- **Objective**: Make it "Fluid & Reactive".
-- **Infrastructure**: Added `Lenis` smooth scroll and global noise.
-- **Interaction**: Built `Magnetic` button wrappers and `CustomCursor`.
-- **Layout Swap**: Swapped the UI patterns for "Projects" and "Credentials" based on content density:
-    *   *Projects* moved to **Stacking Cards** (better for storytelling).
-    *   *Credentials* moved to **Expand-on-Hover** (better for scanning).
-
-## 🛠️ Getting Started
-
-1.  **Clone the repository**:
-    ```bash
-    git clone https://github.com/YourUsername/personal-web-portfolio.git
-    ```
-
-2.  **Install dependencies**:
-    ```bash
-    npm install
-    # or
-    yarn install
-    ```
-
-3.  **Run the development server**:
-    ```bash
-    npm run dev
-    ```
-
-4.  **Open**: [http://localhost:3000](http://localhost:3000)
-
-## 📄 License
-[MIT](LICENSE)
+- Three.js loads after first paint; the hero text is server-rendered.
+- Particle count, pixel ratio, cloud detail and frame rate scale down on phones and low-memory devices.
+- Blur on flying panels is desktop-only; phones use opacity and depth.
+- `prefers-reduced-motion` turns off smooth scroll, letter animations and particle drift.
