@@ -21,7 +21,7 @@ Content is one JSON document. The studio writes each published version to Vercel
 
 ### Set it up once
 
-1. **Storage.** In Vercel: *Storage → Create → Blob*, connect it to this project. That adds `BLOB_READ_WRITE_TOKEN`.
+1. **Storage.** In the Vercel dashboard sidebar: *Storage → Create → Blob*, choose **Public** access, then on the store’s *Projects* tab click *Connect to Project*. That adds `BLOB_READ_WRITE_TOKEN` and `BLOB_STORE_ID`.
 2. **Secrets.** Run `npm run setup-studio`, choose a password, and paste the printed variables into *Settings → Environment Variables*:
    - `ADMIN_PASSWORD_HASH` (scrypt hash; your password is never stored)
    - `ADMIN_SECRET_KEY` (a second secret you type at login)
