@@ -17,11 +17,12 @@ const PREFIX = "content/";
 const KEEP = 12;
 const LOCAL_DIR = path.join(process.cwd(), ".content");
 
-const blobMode = () => Boolean(process.env.BLOB_READ_WRITE_TOKEN);
+// Connected stores authenticate with OIDC (BLOB_STORE_ID) or a read-write token; either works for content.
+const blobMode = () => Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID);
 const localMode = () => !blobMode() && (process.env.NODE_ENV === "development" || process.env.CONTENT_STORE === "local");
 export const storageReady = () => blobMode() || localMode();
-/** Uploads need real Blob storage (they go straight from the browser to it). */
-export const uploadsReady = blobMode;
+/** Browser uploads need the read-write token to sign upload tokens. */
+export const uploadsReady = () => Boolean(process.env.BLOB_READ_WRITE_TOKEN);
 
 export interface Version {
   url: string;
